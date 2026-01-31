@@ -14,7 +14,7 @@
     },
     {
       "date": "[2025.03]",
-      "content": "Received a Full Scholarship for the best grades from SEOULTECH."
+      "content": "Received <strong>Full Scholarship for the best grades</strong> from SEOULTECH."
     },
     {
       "date": "[2024.01]",
@@ -28,7 +28,7 @@
       "venue": "The Institute of Electronics and Information Engineers (IEIE), 2025 (Poster)"
     },
     {
-      "title": "[Project] Spiking-NeuLF: A Low-Power Spiking Neural Light Field Model",
+      "title": "<a href='https://github.com/2322wednesday/Spiking-NeuLF' target='_blank'>[Project] Spiking-NeuLF: A Low-Power Spiking Neural Light Field Model</a>",
       "authors": "Capstone Design Project",
       "venue": "Sep. 2023 - May. 2024"
     }
