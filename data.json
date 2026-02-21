@@ -42,21 +42,26 @@
   ],
   "gallery": [
     {
+      "event": "Graduate Merit Scholarship",
+      "date": "[2026.03]",
+      "description": "Received Graduate Merit Scholarship (Awarded to top incoming graduate students) from Korea University",
+      "photos": [
+        "img/gallery/grand_merit_scholarship.png"
+      ]
+    },
+    {
       "event": "SPARK 9th Poster Session",
       "date": "[2026.02]",
       "description": "Presented research on two topics at the SPARK 9th Poster Session. Engaged in interdisciplinary discussions with participants from diverse backgrounds.",
-      "photos": []
+      "photos": [
+        "img/gallery/grand_prize.jpg",
+        "img/gallery/poster_session.jpg"
+      ]
     },
     {
       "event": "Capstone Design Grand Prize",
       "date": "[2026.02]",
       "description": "Received Grand Prize (1st Place) in Capstone Design Project at SEOULTECH.",
-      "photos": []
-    },
-    {
-      "event": "KIST Research Internship",
-      "date": "[2025.03]",
-      "description": "Started research internship at Korea Institute of Science and Technology (KIST).",
       "photos": []
     }
   ]
