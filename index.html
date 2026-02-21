@@ -307,6 +307,16 @@
             margin-bottom: 0.3rem;
         }
 
+        .pub-title-link {
+            color: var(--primary-color);
+            transition: color 0.2s;
+        }
+
+        .pub-title-link:hover {
+            color: var(--accent-color);
+            text-decoration: underline;
+        }
+
         .pub-authors {
             color: var(--text-gray);
             font-size: 0.95rem;
@@ -678,8 +688,11 @@
                     data.publications.forEach(item => {
                         const div = document.createElement('div');
                         div.className = 'pub-item';
+                        const titleHtml = item.link
+                            ? `<a href="${item.link}" target="_blank" class="pub-title-link">${item.title} ↗</a>`
+                            : item.title;
                         div.innerHTML = `
-                            <div class="pub-title">${item.title}</div>
+                            <div class="pub-title">${titleHtml}</div>
                             <div class="pub-authors">${item.authors}</div>
                             <div class="pub-venue">${item.venue}</div>
                         `;
