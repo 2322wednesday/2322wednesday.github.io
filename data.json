@@ -35,14 +35,14 @@
     },
     {
       "title": "[Project] Spiking-NeuLF: A Low-Power Spiking Neural Light Field Model",
-      "authors": "Seonghan Kwon, H.Y. Lee, H.M. Jung",
+      "authors": "<strong>Seonghan Kwon</strong>, H.Y. Lee, H.M. Jung",
       "venue": "🥇 Grand Prize (1st Place) in Capstone Design Project at SEOULTECH 🎉",
       "link": "https://github.com/2322wednesday/Spiking-NeuLF"
     }
   ],
   "gallery": [
     {
-      "event": "Graduate Merit Scholarship",
+      "event": "🏅 Graduate Merit Scholarship",
       "date": "[2026.03]",
       "description": "Received Graduate Merit Scholarship (Awarded to top incoming graduate students) from Korea University",
       "photos": [
@@ -50,19 +50,19 @@
       ]
     },
     {
-      "event": "SPARK 9th Poster Session",
+      "event": "🥇 Capstone Design Grand Prize",
       "date": "[2026.02]",
-      "description": "Presented research on two topics at the SPARK 9th Poster Session. Engaged in interdisciplinary discussions with participants from diverse backgrounds.",
+      "description": "Received Grand Prize (1st Place) in Capstone Design Project at SEOULTECH.",
+      "photos": []
+    },
+    {
+      "event": "🥈 SPARK 9th Poster Session",
+      "date": "[2026.02]",
+      "description": "Presented research at the SPARK 9th Poster Session. Engaged in interdisciplinary discussions with participants from diverse backgrounds. Won the grand prize (2nd place) as the best poster.",
       "photos": [
         "img/gallery/grand_prize.jpg",
         "img/gallery/poster_session.jpg"
       ]
-    },
-    {
-      "event": "Capstone Design Grand Prize",
-      "date": "[2026.02]",
-      "description": "Received Grand Prize (1st Place) in Capstone Design Project at SEOULTECH.",
-      "photos": []
     }
   ]
 }
