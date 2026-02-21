@@ -279,6 +279,16 @@
             font-size: 0.9rem;
         }
 
+        .news-link {
+            color: var(--text-dark);
+            transition: color 0.2s;
+        }
+
+        .news-link:hover {
+            color: var(--accent-color);
+            text-decoration: underline;
+        }
+
         .pub-item {
             margin-bottom: 2rem;
             padding-left: 1rem;
@@ -651,9 +661,12 @@
                     data.news.forEach(item => {
                         const div = document.createElement('div');
                         div.className = 'news-item';
+                        const contentHtml = item.link
+                            ? `<a href="${item.link}" target="_blank" class="news-link">${item.content} ↗</a>`
+                            : `<span class="news-content">${item.content}</span>`;
                         div.innerHTML = `
                             <span class="news-date">${item.date}</span>
-                            <span class="news-content">${item.content}</span>
+                            ${contentHtml}
                         `;
                         newsContainer.appendChild(div);
                     });
