@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery — Seonghan Kwon</title>
+    <meta name="description" content="Photo gallery showcasing research activities and events by Seonghan Kwon.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@400;600;800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* ============================ */
+        /* 1. 기본 스타일 (index.html과 동일) */
+        /* ============================ */
+        :root {
+            --primary-color: #0f172a;
+            --accent-color: #3b82f6;
+            --text-dark: #1e293b;
+            --text-gray: #475569;
+            --bg-glass: rgba(255, 255, 255, 0.65);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: transparent;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: 0.2s;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* 배경 캔버스 */
+        #networkCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at center, #ffffff 0%, #f1f5f9 100%);
+        }
+
+        /* 네비게이션 */
+        header {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.5);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            font-family: 'Fira Code', monospace;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--primary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            font-weight: 600;
+            color: var(--text-gray);
+            font-size: 0.95rem;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--accent-color);
+        }
+
+        /* ============================ */
+        /* 2. 갤러리 페이지 헤더 */
+        /* ============================ */
+        .page-header {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 6rem 2rem 2rem;
+        }
+
+        .page-header h1 {
+            font-family: 'Fira Code', monospace;
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            letter-spacing: -1px;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .page-header h1::before {
+            content: '';
+            display: block;
+            width: 6px;
+            height: 32px;
+            background: var(--accent-color);
+            border-radius: 2px;
+        }
+
+        .page-subtitle {
+            color: var(--text-gray);
+            margin-top: 0.5rem;
+            font-size: 1rem;
+            padding-left: calc(6px + 0.8rem);
+        }
+
+        /* ============================ */
+        /* 3. 이벤트 카드 */
+        /* ============================ */
+        .gallery-container {
+            max-width: 1000px;
+            margin: 2rem auto 4rem;
+            padding: 0 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+        }
+
+        .event-card {
+            background: var(--bg-glass);
+            backdrop-filter: blur(12px);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .event-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px -4px rgba(0, 0, 0, 0.1);
+        }
+
+        .event-header {
+            padding: 2rem 2rem 1rem;
+        }
+
+        .event-date {
+            font-family: 'Fira Code', monospace;
+            font-weight: 700;
+            color: var(--accent-color);
+            font-size: 0.85rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .event-title {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .event-description {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* ============================ */
+        /* 4. 사진 그리드 */
+        /* ============================ */
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 0.5rem;
+            padding: 1rem 2rem 2rem;
+        }
+
+        .photo-grid img {
+            width: 100%;
+            aspect-ratio: 4/3;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s, opacity 0.3s;
+            border: 1px solid rgba(0, 0, 0, 0.06);
+        }
+
+        .photo-grid img:hover {
+            transform: scale(1.03);
+            opacity: 0.9;
+        }
+
+        /* 사진 없을 때 플레이스홀더 */
+        .no-photos {
+            padding: 1.5rem 2rem 2rem;
+        }
+
+        .no-photos-inner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            padding: 2rem;
+            border: 2px dashed #cbd5e1;
+            border-radius: 12px;
+            color: var(--text-gray);
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        /* ============================ */
+        /* 5. 라이트박스 */
+        /* ============================ */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            cursor: zoom-out;
+            animation: fadeIn 0.25s ease;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            animation: scaleIn 0.25s ease;
+        }
+
+        .lightbox-close {
+            position: fixed;
+            top: 1.5rem;
+            right: 2rem;
+            font-size: 2rem;
+            color: white;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-family: 'Fira Code', monospace;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+            z-index: 2001;
+        }
+
+        .lightbox-close:hover {
+            opacity: 1;
+        }
+
+        .lightbox-nav {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2.5rem;
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-family: 'Fira Code', monospace;
+            opacity: 0.6;
+            transition: opacity 0.2s, background 0.2s;
+            z-index: 2001;
+        }
+
+        .lightbox-nav:hover {
+            opacity: 1;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .lightbox-prev {
+            left: 1.5rem;
+        }
+
+        .lightbox-next {
+            right: 1.5rem;
+        }
+
+        .lightbox-caption {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+            font-family: 'Fira Code', monospace;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 0.5rem 1.2rem;
+            border-radius: 8px;
+            z-index: 2001;
+            white-space: nowrap;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0.9);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* ============================ */
+        /* 6. 푸터 */
+        /* ============================ */
+        footer {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            border-top: 1px solid #e2e8f0;
+            background: white;
+        }
+
+        /* ============================ */
+        /* 7. 반응형 */
+        /* ============================ */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .page-header {
+                padding-top: 4rem;
+            }
+
+            .page-header h1 {
+                font-size: 1.6rem;
+            }
+
+            .photo-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.4rem;
+                padding: 0.8rem 1.2rem 1.5rem;
+            }
+
+            .event-header {
+                padding: 1.5rem 1.2rem 0.8rem;
+            }
+
+            .lightbox-nav {
+                font-size: 1.8rem;
+                padding: 0.3rem 0.7rem;
+            }
+
+            .lightbox-prev {
+                left: 0.5rem;
+            }
+
+            .lightbox-next {
+                right: 0.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <canvas id="networkCanvas"></canvas>
+
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo">Seonghan Kwon</a>
+            <nav class="nav-links">
+                <a href="index.html#about">About</a>
+                <a href="index.html#news">News</a>
+                <a href="index.html#publications">Publications</a>
+                <a href="gallery.html" class="active">Gallery</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="page-header">
+        <h1>Gallery</h1>
+        <p class="page-subtitle">Research activities and memorable moments.</p>
+    </div>
+
+    <div class="gallery-container" id="gallery-container"></div>
+
+    <!-- 라이트박스 -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" id="lightbox-close">✕</button>
+        <button class="lightbox-nav lightbox-prev" id="lightbox-prev">‹</button>
+        <button class="lightbox-nav lightbox-next" id="lightbox-next">›</button>
+        <img id="lightbox-img" src="" alt="">
+        <div class="lightbox-caption" id="lightbox-caption"></div>
+    </div>
+
+    <footer>
+        <p>Please always contact me :)</p>
+        <p style="margin-top:0.5rem; font-size: 0.8rem;">&copy; 2026 Seonghan Kwon. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // --------------------------------------------------
+        // Part 1: 배경 파티클 (index.html과 동일)
+        // --------------------------------------------------
+        const canvas = document.getElementById('networkCanvas');
+        const ctx = canvas.getContext('2d');
+        let particlesArray;
+        let mouse = { x: null, y: null, radius: 150 };
+
+        function handleResize() {
+            const dpr = window.devicePixelRatio || 1;
+            canvas.width = window.innerWidth * dpr;
+            canvas.height = window.innerHeight * dpr;
+            ctx.scale(dpr, dpr);
+            init();
+        }
+
+        window.addEventListener('resize', handleResize);
+        window.addEventListener('mousemove', function (e) { mouse.x = e.x; mouse.y = e.y; });
+        window.addEventListener('mouseout', function () { mouse.x = undefined; mouse.y = undefined; });
+
+        class Particle {
+            constructor(x, y, size, color) {
+                this.x = x; this.y = y;
+                this.baseX = x; this.baseY = y;
+                this.size = size; this.color = color;
+                this.angle = Math.random() * Math.PI * 2;
+                this.speed = Math.random() * 0.005 + 0.002;
+                this.radius = Math.random() * 10 + 5;
+                this.alpha = Math.random();
+                this.pulseSpeed = Math.random() * 0.02 + 0.005;
+            }
+            draw() {
+                ctx.globalAlpha = this.alpha;
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.rect(this.x, this.y, this.size, this.size);
+                ctx.fill();
+                ctx.globalAlpha = 1.0;
+            }
+            update() {
+                this.angle += this.speed;
+                this.x = this.baseX + Math.cos(this.angle) * this.radius;
+                this.y = this.baseY + Math.sin(this.angle) * this.radius;
+                this.alpha += this.pulseSpeed;
+                if (this.alpha > 1 || this.alpha < 0.2) this.pulseSpeed = -this.pulseSpeed;
+                if (mouse.x) {
+                    let dx = mouse.x - this.x;
+                    let dy = mouse.y - this.y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+                    if (distance < mouse.radius) {
+                        let force = (mouse.radius - distance) / mouse.radius;
+                        let directionX = dx / distance;
+                        let directionY = dy / distance;
+                        this.x -= directionX * force * 2;
+                        this.y -= directionY * force * 2;
+                    }
+                }
+                this.draw();
+            }
+        }
+
+        function init() {
+            particlesArray = [];
+            if (canvas.width <= 1) return;
+            let numberOfParticles = (window.innerWidth * window.innerHeight) / 20000;
+            let centerX = window.innerWidth / 2;
+            let centerY = window.innerHeight / 2.8;
+            let brainWidth = Math.min(window.innerWidth, window.innerHeight) * 0.45;
+            let hemisphereSeparation = brainWidth * 0.25;
+
+            for (let i = 0; i < numberOfParticles; i++) {
+                let size = (Math.random() * 2.5) + 2;
+                let color = Math.random() > 0.5 ? '#64748b' : '#94a3b8';
+                let angle = Math.random() * Math.PI * 2;
+                let radiusRatio = Math.sqrt(Math.random());
+                let currentRadius = brainWidth * radiusRatio;
+                let x = Math.cos(angle) * currentRadius;
+                let y = Math.sin(angle) * currentRadius * 0.75;
+                if (Math.cos(angle) > 0) x += hemisphereSeparation;
+                else x -= hemisphereSeparation;
+                x += (Math.random() - 0.5) * 30;
+                y += (Math.random() - 0.5) * 30;
+                let finalX = centerX + x;
+                let finalY = centerY + y;
+                if (finalX > 0 && finalX < window.innerWidth && finalY > 0 && finalY < window.innerHeight) {
+                    particlesArray.push(new Particle(finalX, finalY, size, color));
+                }
+            }
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+            }
+            connect();
+            if (mouse.x && window.innerWidth > 768) {
+                ctx.font = '12px "Fira Code", monospace';
+                ctx.fillStyle = '#3b82f6';
+                ctx.fillText(`ADDR: 0x${Math.floor(mouse.x).toString(16).toUpperCase().padStart(4, '0')}`, mouse.x + 15, mouse.y);
+                ctx.fillText(`DATA: 0x${Math.floor(mouse.y).toString(16).toUpperCase().padStart(4, '0')}`, mouse.x + 15, mouse.y + 15);
+            }
+        }
+
+        function connect() {
+            let maxDistance = (window.innerWidth / 7) * (window.innerHeight / 7);
+            for (let a = 0; a < particlesArray.length; a++) {
+                for (let b = a; b < particlesArray.length; b++) {
+                    let distance = ((particlesArray[a].x - particlesArray[b].x) ** 2) + ((particlesArray[a].y - particlesArray[b].y) ** 2);
+                    if (distance < maxDistance) {
+                        let opacityValue = 1 - (distance / maxDistance);
+                        ctx.strokeStyle = 'rgba(100, 116, 139,' + (opacityValue * 0.45) + ')';
+                        ctx.lineWidth = 0.6;
+                        ctx.beginPath();
+                        ctx.moveTo(particlesArray[a].x + particlesArray[a].size / 2, particlesArray[a].y + particlesArray[a].size / 2);
+                        ctx.lineTo(particlesArray[b].x + particlesArray[b].size / 2, particlesArray[a].y + particlesArray[a].size / 2);
+                        ctx.lineTo(particlesArray[b].x + particlesArray[b].size / 2, particlesArray[b].y + particlesArray[b].size / 2);
+                        ctx.stroke();
+                    }
+                }
+                if (mouse.x != undefined) {
+                    let dx = mouse.x - particlesArray[a].x;
+                    let dy = mouse.y - particlesArray[a].y;
+                    let distance = (dx * dx) + (dy * dy);
+                    if (distance < mouse.radius * mouse.radius) {
+                        let opacity = 1 - distance / (mouse.radius * mouse.radius);
+                        ctx.strokeStyle = 'rgba(59, 130, 246,' + opacity * 0.8 + ')';
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(mouse.x, mouse.y);
+                        ctx.lineTo(particlesArray[a].x + particlesArray[a].size / 2, particlesArray[a].y + particlesArray[a].size / 2);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        handleResize();
+        animate();
+        window.addEventListener('load', handleResize);
+
+        // --------------------------------------------------
+        // Part 2: 갤러리 데이터 로드 및 렌더링
+        // --------------------------------------------------
+        let allPhotos = []; // 라이트박스용 전체 사진 배열
+        let currentPhotoIndex = 0;
+
+        fetch('data.json')
+            .then(response => response.json())
+            .then(data => {
+                const container = document.getElementById('gallery-container');
+                if (!data.gallery || !container) return;
+
+                data.gallery.forEach(event => {
+                    const card = document.createElement('div');
+                    card.className = 'event-card';
+
+                    let photosHtml = '';
+                    if (event.photos && event.photos.length > 0) {
+                        const photoItems = event.photos.map((photo, i) => {
+                            const globalIndex = allPhotos.length;
+                            allPhotos.push({ src: photo, event: event.event });
+                            return `<img src="${photo}" alt="${event.event}" loading="lazy" onclick="openLightbox(${globalIndex})">`;
+                        }).join('');
+                        photosHtml = `<div class="photo-grid">${photoItems}</div>`;
+                    } else {
+                        photosHtml = `
+                            <div class="no-photos">
+                                <div class="no-photos-inner">📷 Photos coming soon</div>
+                            </div>
+                        `;
+                    }
+
+                    card.innerHTML = `
+                        <div class="event-header">
+                            <div class="event-date">${event.date}</div>
+                            <div class="event-title">${event.event}</div>
+                            <div class="event-description">${event.description}</div>
+                        </div>
+                        ${photosHtml}
+                    `;
+                    container.appendChild(card);
+                });
+            })
+            .catch(error => console.error('Error loading gallery data:', error));
+
+        // --------------------------------------------------
+        // Part 3: 라이트박스 기능
+        // --------------------------------------------------
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxCaption = document.getElementById('lightbox-caption');
+
+        function openLightbox(index) {
+            currentPhotoIndex = index;
+            updateLightbox();
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function updateLightbox() {
+            const photo = allPhotos[currentPhotoIndex];
+            lightboxImg.src = photo.src;
+            lightboxCaption.textContent = `${photo.event}  ·  ${currentPhotoIndex + 1} / ${allPhotos.length}`;
+        }
+
+        function prevPhoto() {
+            currentPhotoIndex = (currentPhotoIndex - 1 + allPhotos.length) % allPhotos.length;
+            updateLightbox();
+        }
+
+        function nextPhoto() {
+            currentPhotoIndex = (currentPhotoIndex + 1) % allPhotos.length;
+            updateLightbox();
+        }
+
+        document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+        document.getElementById('lightbox-prev').addEventListener('click', (e) => { e.stopPropagation(); prevPhoto(); });
+        document.getElementById('lightbox-next').addEventListener('click', (e) => { e.stopPropagation(); nextPhoto(); });
+        lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+
+        document.addEventListener('keydown', (e) => {
+            if (!lightbox.classList.contains('active')) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') prevPhoto();
+            if (e.key === 'ArrowRight') nextPhoto();
+        });
+    </script>
+</body>
+
+</html>

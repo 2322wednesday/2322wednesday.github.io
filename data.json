@@ -39,5 +39,25 @@
       "venue": "Sep. 2023 - May. 2024",
       "link": "https://github.com/2322wednesday/Spiking-NeuLF"
     }
+  ],
+  "gallery": [
+    {
+      "event": "SPARK 9th Poster Session",
+      "date": "[2026.02]",
+      "description": "Presented research on two topics at the SPARK 9th Poster Session. Engaged in interdisciplinary discussions with participants from diverse backgrounds.",
+      "photos": []
+    },
+    {
+      "event": "Capstone Design Grand Prize",
+      "date": "[2026.02]",
+      "description": "Received Grand Prize (1st Place) in Capstone Design Project at SEOULTECH.",
+      "photos": []
+    },
+    {
+      "event": "KIST Research Internship",
+      "date": "[2025.03]",
+      "description": "Started research internship at Korea Institute of Science and Technology (KIST).",
+      "photos": []
+    }
   ]
 }
