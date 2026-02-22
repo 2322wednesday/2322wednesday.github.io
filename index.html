@@ -372,6 +372,41 @@
             margin-bottom: 0.5rem;
         }
 
+        /* ============================ */
+        /* 인사 섹션 */
+        /* ============================ */
+        .greeting-section {
+            max-width: 1000px;
+            margin: 0 auto 4rem;
+            padding: 3rem 2.5rem;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.7) 0%, rgba(241, 245, 249, 0.6) 100%);
+            backdrop-filter: blur(12px);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            border-left: 5px solid var(--accent-color);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .greeting-section p {
+            font-size: 1.05rem;
+            line-height: 1.85;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .greeting-section p:last-child {
+            margin-bottom: 0;
+        }
+
+        .greeting-section strong {
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        .greeting-emoji {
+            font-size: 1.15rem;
+        }
+
         footer {
             text-align: center;
             padding: 4rem 2rem;
@@ -446,6 +481,9 @@
             <div class="info-group">
                 <div class="info-label">Experience</div>
                 <div class="info-content">
+                    <p><strong>Student Researcher</strong>, Korea Institute of Science and Technology (KIST) (Mar. 2026
+                        ~
+                        Current)</p>
                     <p><strong>Research Intern</strong>, Korea Institute of Science and Technology (KIST) (Mar. 2025 ~
                         Feb. 2026)</p>
                     <p><strong>Undergraduate Researcher</strong>, Machine Learning Lab (Jun. 2023 ~ May. 2024)</p>
@@ -487,6 +525,19 @@
                 </div>
             </a>
         </div>
+    </div>
+
+    <div class="greeting-section">
+        <p>Welcome! I am <strong>Seonghan Kwon</strong>, an integrated M.A.–Ph.D. student at <strong>Korea
+                University</strong> and a researcher at the <strong>Korea Institute of Science and Technology
+                (KIST)</strong>. <span class="greeting-emoji">🚀</span></p>
+        <p>My work focuses on bridging <strong>bio-inspired algorithms</strong> and <strong>efficient hardware
+                design</strong> to build next-generation AI systems. I strive to develop AI technologies that deliver
+            <strong>strong performance</strong> while operating with <strong>low power consumption</strong>. <span
+                class="greeting-emoji">🧠⚡</span></p>
+        <p>Ultimately, my goal is to <strong>make advanced AI accessible to everyone without limitations</strong> —
+            serving as a bridge between intelligent algorithms and practical, energy-efficient implementation. <span
+                class="greeting-emoji">🌍</span></p>
     </div>
 
     <section id="news">
