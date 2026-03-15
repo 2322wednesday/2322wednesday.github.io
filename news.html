@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gallery — Seonghan Kwon</title>
-    <meta name="description" content="Photo gallery showcasing research activities and events by Seonghan Kwon.">
+    <title>News — Seonghan Kwon</title>
+    <meta name="description" content="All news and updates by Seonghan Kwon.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -14,7 +14,7 @@
 
     <style>
         /* ============================ */
-        /* 1. 기본 스타일 (index.html과 동일) */
+        /* 1. 기본 스타일 */
         /* ============================ */
         :root {
             --primary-color: #0f172a;
@@ -107,7 +107,7 @@
         }
 
         /* ============================ */
-        /* 2. 갤러리 페이지 헤더 */
+        /* 2. 페이지 헤더 */
         /* ============================ */
         .page-header {
             max-width: 1000px;
@@ -142,220 +142,91 @@
         }
 
         /* ============================ */
-        /* 3. 이벤트 카드 */
+        /* 3. 뉴스 컨테이너 & 아이템 */
         /* ============================ */
-        .gallery-container {
+        .news-section-page {
             max-width: 1000px;
             margin: 2rem auto 4rem;
-            padding: 0 2rem;
-            display: flex;
-            flex-direction: column;
-            gap: 2.5rem;
-        }
-
-        .event-card {
+            padding: 3rem 2rem;
             background: var(--bg-glass);
             backdrop-filter: blur(12px);
             border-radius: 16px;
             border: 1px solid rgba(255, 255, 255, 0.6);
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-            overflow: hidden;
-            transition: transform 0.3s, box-shadow 0.3s;
         }
 
-        .event-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px -4px rgba(0, 0, 0, 0.1);
+        .news-item {
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            gap: 1.5rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid #e2e8f0;
         }
 
-        .event-header {
-            padding: 2rem 2rem 1rem;
+        .news-item:last-child {
+            border-bottom: none;
         }
 
-        .event-date {
+        .news-date {
             font-family: 'Fira Code', monospace;
             font-weight: 700;
             color: var(--accent-color);
-            font-size: 0.85rem;
-            margin-bottom: 0.3rem;
-        }
-
-        .event-title {
-            font-size: 1.3rem;
-            font-weight: 800;
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
-        }
-
-        .event-description {
-            color: var(--text-gray);
-            font-size: 0.95rem;
-            line-height: 1.7;
-        }
-
-        /* ============================ */
-        /* 4. 사진 그리드 */
-        /* ============================ */
-        .photo-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 0.5rem;
-            padding: 1rem 2rem 2rem;
-        }
-
-        .photo-grid img {
-            width: 100%;
-            aspect-ratio: 4/3;
-            object-fit: cover;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: transform 0.3s, opacity 0.3s;
-            border: 1px solid rgba(0, 0, 0, 0.06);
-        }
-
-        .photo-grid img:hover {
-            transform: scale(1.03);
-            opacity: 0.9;
-        }
-
-        /* 사진 없을 때 플레이스홀더 */
-        .no-photos {
-            padding: 1.5rem 2rem 2rem;
-        }
-
-        .no-photos-inner {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.6rem;
-            padding: 2rem;
-            border: 2px dashed #cbd5e1;
-            border-radius: 12px;
-            color: var(--text-gray);
-            font-size: 0.95rem;
-            font-weight: 500;
-        }
-
-        /* ============================ */
-        /* 5. 라이트박스 */
-        /* ============================ */
-        .lightbox {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
-            padding: 2rem;
-            cursor: zoom-out;
-            animation: fadeIn 0.25s ease;
-        }
-
-        .lightbox.active {
-            display: flex;
-        }
-
-        .lightbox img {
-            max-width: 90%;
-            max-height: 90vh;
-            object-fit: contain;
-            border-radius: 8px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-            animation: scaleIn 0.25s ease;
-        }
-
-        .lightbox-close {
-            position: fixed;
-            top: 1.5rem;
-            right: 2rem;
-            font-size: 2rem;
-            color: white;
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-family: 'Fira Code', monospace;
-            opacity: 0.7;
-            transition: opacity 0.2s;
-            z-index: 2001;
-        }
-
-        .lightbox-close:hover {
-            opacity: 1;
-        }
-
-        .lightbox-nav {
-            position: fixed;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 2.5rem;
-            color: white;
-            background: rgba(255, 255, 255, 0.1);
-            border: none;
-            cursor: pointer;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            font-family: 'Fira Code', monospace;
-            opacity: 0.6;
-            transition: opacity 0.2s, background 0.2s;
-            z-index: 2001;
-        }
-
-        .lightbox-nav:hover {
-            opacity: 1;
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        .lightbox-prev {
-            left: 1.5rem;
-        }
-
-        .lightbox-next {
-            right: 1.5rem;
-        }
-
-        .lightbox-caption {
-            position: fixed;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            color: rgba(255, 255, 255, 0.8);
             font-size: 0.9rem;
-            font-family: 'Fira Code', monospace;
-            background: rgba(0, 0, 0, 0.4);
-            padding: 0.5rem 1.2rem;
-            border-radius: 8px;
-            z-index: 2001;
-            white-space: nowrap;
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
+        .news-link {
+            color: var(--text-dark);
+            transition: color 0.2s;
         }
 
-        @keyframes scaleIn {
-            from {
-                transform: scale(0.9);
-                opacity: 0;
-            }
+        .news-link:hover {
+            color: var(--accent-color);
+            text-decoration: underline;
+        }
 
-            to {
-                transform: scale(1);
-                opacity: 1;
-            }
+        .news-body {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .news-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-top: 0.5rem;
+        }
+
+        .badge-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.3rem 0.8rem;
+            background: rgba(59, 130, 246, 0.08);
+            color: var(--accent-color);
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            transition: all 0.2s ease;
+        }
+
+        .badge-link:hover {
+            background: var(--accent-color);
+            color: white;
+            text-decoration: none;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.2);
+        }
+
+        .badge-link svg {
+            width: 14px;
+            height: 14px;
+            margin-right: 4px;
+            fill: currentColor;
+            vertical-align: middle;
         }
 
         /* ============================ */
-        /* 6. 푸터 */
+        /* 4. 푸터 */
         /* ============================ */
         footer {
             text-align: center;
@@ -367,7 +238,7 @@
         }
 
         /* ============================ */
-        /* 7. 반응형 */
+        /* 5. 반응형 */
         /* ============================ */
         @media (max-width: 768px) {
             .nav-links {
@@ -382,27 +253,9 @@
                 font-size: 1.6rem;
             }
 
-            .photo-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 0.4rem;
-                padding: 0.8rem 1.2rem 1.5rem;
-            }
-
-            .event-header {
-                padding: 1.5rem 1.2rem 0.8rem;
-            }
-
-            .lightbox-nav {
-                font-size: 1.8rem;
-                padding: 0.3rem 0.7rem;
-            }
-
-            .lightbox-prev {
-                left: 0.5rem;
-            }
-
-            .lightbox-next {
-                right: 0.5rem;
+            .news-item {
+                grid-template-columns: 1fr;
+                gap: 0.3rem;
             }
         }
     </style>
@@ -417,27 +270,20 @@
             <a href="index.html" class="logo">Seonghan Kwon</a>
             <nav class="nav-links">
                 <a href="index.html#about">About</a>
-                <a href="news.html">News</a>
+                <a href="news.html" class="active">News</a>
                 <a href="index.html#publications">Publications</a>
-                <a href="gallery.html" class="active">Gallery</a>
+                <a href="gallery.html">Gallery</a>
             </nav>
         </div>
     </header>
 
     <div class="page-header">
-        <h1>Gallery</h1>
-        <p class="page-subtitle">Research activities and memorable moments.</p>
+        <h1>News</h1>
+        <p class="page-subtitle">All news, updates, and activities.</p>
     </div>
 
-    <div class="gallery-container" id="gallery-container"></div>
-
-    <!-- 라이트박스 -->
-    <div class="lightbox" id="lightbox">
-        <button class="lightbox-close" id="lightbox-close">✕</button>
-        <button class="lightbox-nav lightbox-prev" id="lightbox-prev">‹</button>
-        <button class="lightbox-nav lightbox-next" id="lightbox-next">›</button>
-        <img id="lightbox-img" src="" alt="">
-        <div class="lightbox-caption" id="lightbox-caption"></div>
+    <div class="news-section-page">
+        <div id="news-container-full"></div>
     </div>
 
     <footer>
@@ -446,9 +292,7 @@
     </footer>
 
     <script>
-        // --------------------------------------------------
-        // Part 1: 배경 파티클 (index.html과 동일)
-        // --------------------------------------------------
+        // 배경 파티클 코드
         const canvas = document.getElementById('networkCanvas');
         const ctx = canvas.getContext('2d');
         let particlesArray;
@@ -588,98 +432,37 @@
         animate();
         window.addEventListener('load', handleResize);
 
-        // --------------------------------------------------
-        // Part 2: 갤러리 데이터 로드 및 렌더링
-        // --------------------------------------------------
-        let allPhotos = []; // 라이트박스용 전체 사진 배열
-        let currentPhotoIndex = 0;
-
+        // 뉴스 데이터 로드 및 렌더링
         fetch('data.json')
             .then(response => response.json())
             .then(data => {
-                const container = document.getElementById('gallery-container');
-                if (!data.gallery || !container) return;
+                const container = document.getElementById('news-container-full');
+                if (data.news && container) {
+                    data.news.forEach(item => {
+                        const div = document.createElement('div');
+                        div.className = 'news-item';
+                        const contentHtml = item.link
+                            ? `<a href="${item.link}" target="_blank" class="news-link">${item.content} ↗</a>`
+                            : `<span class="news-content">${item.content}</span>`;
 
-                data.gallery.forEach(event => {
-                    const card = document.createElement('div');
-                    card.className = 'event-card';
-                    if (event.id) card.id = event.id;
+                        let badgesHtml = '';
+                        if (item.badges && item.badges.length > 0) {
+                            const badges = item.badges.map(b => `<a href="${b.url}" ${b.url.startsWith('http') ? 'target="_blank"' : ''} class="badge-link">${b.text}</a>`).join('');
+                            badgesHtml = `<div class="news-badges">${badges}</div>`;
+                        }
 
-                    let photosHtml = '';
-                    if (event.photos && event.photos.length > 0) {
-                        const photoItems = event.photos.map((photo, i) => {
-                            const globalIndex = allPhotos.length;
-                            allPhotos.push({ src: photo, event: event.event });
-                            return `<img src="${photo}" alt="${event.event}" loading="lazy" onclick="openLightbox(${globalIndex})">`;
-                        }).join('');
-                        photosHtml = `<div class="photo-grid">${photoItems}</div>`;
-                    } else {
-                        photosHtml = `
-                            <div class="no-photos">
-                                <div class="no-photos-inner">📷 Photos coming soon</div>
+                        div.innerHTML = `
+                            <span class="news-date">${item.date}</span>
+                            <div class="news-body">
+                                ${contentHtml}
+                                ${badgesHtml}
                             </div>
                         `;
-                    }
-
-                    card.innerHTML = `
-                        <div class="event-header">
-                            <div class="event-date">${event.date}</div>
-                            <div class="event-title">${event.event}</div>
-                            <div class="event-description">${event.description}</div>
-                        </div>
-                        ${photosHtml}
-                    `;
-                    container.appendChild(card);
-                });
+                        container.appendChild(div);
+                    });
+                }
             })
-            .catch(error => console.error('Error loading gallery data:', error));
-
-        // --------------------------------------------------
-        // Part 3: 라이트박스 기능
-        // --------------------------------------------------
-        const lightbox = document.getElementById('lightbox');
-        const lightboxImg = document.getElementById('lightbox-img');
-        const lightboxCaption = document.getElementById('lightbox-caption');
-
-        function openLightbox(index) {
-            currentPhotoIndex = index;
-            updateLightbox();
-            lightbox.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeLightbox() {
-            lightbox.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-
-        function updateLightbox() {
-            const photo = allPhotos[currentPhotoIndex];
-            lightboxImg.src = photo.src;
-            lightboxCaption.textContent = `${photo.event}  ·  ${currentPhotoIndex + 1} / ${allPhotos.length}`;
-        }
-
-        function prevPhoto() {
-            currentPhotoIndex = (currentPhotoIndex - 1 + allPhotos.length) % allPhotos.length;
-            updateLightbox();
-        }
-
-        function nextPhoto() {
-            currentPhotoIndex = (currentPhotoIndex + 1) % allPhotos.length;
-            updateLightbox();
-        }
-
-        document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
-        document.getElementById('lightbox-prev').addEventListener('click', (e) => { e.stopPropagation(); prevPhoto(); });
-        document.getElementById('lightbox-next').addEventListener('click', (e) => { e.stopPropagation(); nextPhoto(); });
-        lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
-
-        document.addEventListener('keydown', (e) => {
-            if (!lightbox.classList.contains('active')) return;
-            if (e.key === 'Escape') closeLightbox();
-            if (e.key === 'ArrowLeft') prevPhoto();
-            if (e.key === 'ArrowRight') nextPhoto();
-        });
+            .catch(error => console.error('Error loading news data:', error));
     </script>
 </body>
 

@@ -501,7 +501,7 @@
             <a href="#" class="logo">Seonghan Kwon</a>
             <nav class="nav-links">
                 <a href="#about">About</a>
-                <a href="#news">News</a>
+                <a href="news.html">News</a>
                 <a href="#publications">Publications</a>
                 <a href="gallery.html">Gallery</a>
             </nav>
@@ -821,7 +821,8 @@
                 // Render News
                 const newsContainer = document.getElementById('news-container');
                 if (data.news && newsContainer) {
-                    data.news.forEach(item => {
+                    const recentNews = data.news.slice(0, 5);
+                    recentNews.forEach(item => {
                         const div = document.createElement('div');
                         div.className = 'news-item';
                         const contentHtml = item.link
@@ -843,6 +844,14 @@
                         `;
                         newsContainer.appendChild(div);
                     });
+
+                    if (data.news.length > 5) {
+                        const moreBtn = document.createElement('div');
+                        moreBtn.style.textAlign = 'center';
+                        moreBtn.style.marginTop = '2rem';
+                        moreBtn.innerHTML = '<a href="news.html" class="badge-link" style="padding: 0.5rem 1.2rem; font-size: 0.95rem; display: inline-flex;">View All News →</a>';
+                        newsContainer.appendChild(moreBtn);
+                    }
                 }
 
                 // Render Publications
