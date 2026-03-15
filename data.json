@@ -2,7 +2,13 @@
   "news": [
     {
       "date": "[2026.03]",
-      "content": "Received <strong>Graduate Merit Scholarship</strong> (Awarded to top incoming graduate students) from Korea University."
+      "content": "Received <strong>Graduate Merit Scholarship</strong> (Awarded to top incoming graduate students) from Korea University.",
+      "badges": [
+        {
+          "text": "📸 Photo Gallery",
+          "url": "gallery.html#merit-scholarship"
+        }
+      ]
     },
     {
       "date": "[2026.02]",
@@ -25,7 +31,16 @@
     {
       "date": "[2026.02]",
       "content": "Presented research at <strong>SPARK 9th Poster Session</strong> — received Best Poster 2nd Prize.",
-      "link": "https://www.linkedin.com/posts/kwonseonghan_spark9qzc-udqswmtpsspmsps-activity-7429676031579652096-E3_8"
+      "badges": [
+        {
+          "text": "💼 LinkedIn",
+          "url": "https://www.linkedin.com/posts/kwonseonghan_spark9qzc-udqswmtpsspmsps-activity-7429676031579652096-E3_8"
+        },
+        {
+          "text": "📸 Photo Gallery",
+          "url": "gallery.html#spark-poster"
+        }
+      ]
     },
     {
       "date": "[2025.03]",
@@ -56,6 +71,7 @@
   ],
   "gallery": [
     {
+      "id": "merit-scholarship",
       "event": "🏅 Graduate Merit Scholarship",
       "date": "[2026.03]",
       "description": "Received Graduate Merit Scholarship (Awarded to top incoming graduate students) from Korea University",
@@ -73,6 +89,7 @@
       ]
     },
     {
+      "id": "spark-poster",
       "event": "🥈 SPARK 9th Poster Session",
       "date": "[2026.02]",
       "description": "Presented research at the SPARK 9th Poster Session. Engaged in interdisciplinary discussions with participants from diverse backgrounds. Won the grand prize (2nd place) as the best poster.",
