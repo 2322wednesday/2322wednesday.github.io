@@ -71,6 +71,11 @@
   ],
   "publications": [
     {
+      "title": "HIP-MaN: Hippocampus-Inspired Periodic Mapping and Navigation for Autonomous Mobile Robot",
+      "authors": "D.Y. Kim, <strong>Seonghan Kwon</strong>, S.S Park, H.J. Jang, J.W. Kim, Y.J. Jeong, I.H. Kim, J.K. Kim and J.K. Park",
+      "venue": "Design Automation Conference (DAC), 2026"
+    },
+    {
       "title": "A Survey of LLM Quantization for Edge device",
       "authors": "<strong>Seonghan Kwon</strong>, S.Y. Kim, and J.K. Park",
       "venue": "The Institute of Electronics and Information Engineers (IEIE), 2025 (Poster)",
