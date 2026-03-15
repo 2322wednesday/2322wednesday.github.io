@@ -29,6 +29,11 @@
             padding: 0;
         }
 
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 5.5rem;
+        }
+
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             line-height: 1.6;
@@ -330,6 +335,39 @@
             text-decoration: underline;
         }
 
+        .news-body {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .news-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-top: 0.5rem;
+        }
+
+        .badge-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.3rem 0.8rem;
+            background: rgba(59, 130, 246, 0.08);
+            color: var(--accent-color);
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            transition: all 0.2s ease;
+        }
+
+        .badge-link:hover {
+            background: var(--accent-color);
+            color: white;
+            text-decoration: none;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.2);
+        }
+
         .pub-item {
             margin-bottom: 2rem;
             padding-left: 1rem;
@@ -534,7 +572,8 @@
         <p>My work focuses on bridging <strong>bio-inspired algorithms</strong> and <strong>efficient hardware
                 design</strong> to build next-generation AI systems. I strive to develop AI technologies that deliver
             <strong>strong performance</strong> while operating with <strong>low power consumption</strong>. <span
-                class="greeting-emoji">🧠⚡</span></p>
+                class="greeting-emoji">🧠⚡</span>
+        </p>
         <p>Ultimately, my goal is to <strong>make advanced AI accessible to everyone without limitations</strong> —
             serving as a bridge between intelligent algorithms and practical, energy-efficient implementation. <span
                 class="greeting-emoji">🌍</span></p>
@@ -780,9 +819,19 @@
                         const contentHtml = item.link
                             ? `<a href="${item.link}" target="_blank" class="news-link">${item.content} ↗</a>`
                             : `<span class="news-content">${item.content}</span>`;
+
+                        let badgesHtml = '';
+                        if (item.badges && item.badges.length > 0) {
+                            const badges = item.badges.map(b => `<a href="${b.url}" ${b.url.startsWith('http') ? 'target="_blank"' : ''} class="badge-link">${b.text}</a>`).join('');
+                            badgesHtml = `<div class="news-badges">${badges}</div>`;
+                        }
+
                         div.innerHTML = `
                             <span class="news-date">${item.date}</span>
-                            ${contentHtml}
+                            <div class="news-body">
+                                ${contentHtml}
+                                ${badgesHtml}
+                            </div>
                         `;
                         newsContainer.appendChild(div);
                     });

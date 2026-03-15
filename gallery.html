@@ -30,6 +30,11 @@
             padding: 0;
         }
 
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 6.5rem;
+        }
+
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             line-height: 1.6;
@@ -598,6 +603,7 @@
                 data.gallery.forEach(event => {
                     const card = document.createElement('div');
                     card.className = 'event-card';
+                    if (event.id) card.id = event.id;
 
                     let photosHtml = '';
                     if (event.photos && event.photos.length > 0) {
