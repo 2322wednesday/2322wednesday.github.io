@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seonghan Kwon</title>
+    <link rel="icon" type="image/jpeg" href="img/favicon_ksh_char.jpg">
+    <link rel="apple-touch-icon" href="img/favicon_ksh_char.jpg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -257,6 +259,12 @@
             font-size: 0.75rem;
             color: var(--text-gray);
             line-height: 1.5;
+        }
+
+        /* 파란 카드 위에서는 칩 배경을 흰색으로 (대비 확보) */
+        .honor-item .edu-rank {
+            background: rgba(255, 255, 255, 0.85);
+            border-color: rgba(59, 130, 246, 0.35);
         }
 
         .interest-tags {
@@ -589,7 +597,8 @@
                     <a href="gallery.html#presidential-science-scholarship" class="honor-item">
                         <span class="honor-icon">🎓</span>
                         <span>
-                            <span class="honor-name">Presidential Science Scholarship</span>
+                            <span class="honor-name">Presidential Science Scholarship <span
+                                    class="edu-rank">~4.5% acceptance</span></span>
                             <span class="honor-org">Ministry of Science and ICT, Republic of Korea · 2026</span>
                         </span>
                     </a>
