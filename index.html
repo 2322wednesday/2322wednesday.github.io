@@ -12,9 +12,6 @@
         rel="stylesheet">
 
     <style>
-        /* ============================ */
-        /* 1. 기본 스타일 */
-        /* ============================ */
         :root {
             --primary-color: #0f172a;
             --accent-color: #3b82f6;
@@ -198,6 +195,68 @@
         .link-item:hover {
             color: var(--accent-color);
             text-decoration: underline;
+        }
+
+        .edu-rank {
+            display: inline-block;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--accent-color);
+            background: rgba(59, 130, 246, 0.08);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 6px;
+            padding: 0.05rem 0.5rem;
+            margin-left: 0.3rem;
+            white-space: nowrap;
+            vertical-align: middle;
+        }
+
+        .honor-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .honor-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.6rem 0.9rem;
+            background: rgba(59, 130, 246, 0.06);
+            border: 1px solid rgba(59, 130, 246, 0.18);
+            border-left: 3px solid var(--accent-color);
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .honor-item:hover {
+            background: rgba(59, 130, 246, 0.12);
+            transform: translateX(2px);
+            box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.15);
+        }
+
+        .honor-icon {
+            font-size: 1.2rem;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+
+        .honor-name {
+            display: block;
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--primary-color);
+            line-height: 1.35;
+        }
+
+        .honor-org {
+            display: block;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.75rem;
+            color: var(--text-gray);
+            line-height: 1.5;
         }
 
         .interest-tags {
@@ -518,9 +577,29 @@
             <div class="info-group">
                 <div class="info-label">Education</div>
                 <div class="info-content">
-                    <p><strong>Integrated MA-Ph.D in EE</strong>, Korea University, Korea (Mar. 2026 ~ )</p>
+                    <p><strong>Integrated M.S. & Ph.D in EE</strong>, Korea University, Korea (Mar. 2026 ~ )</p>
                     <p><strong>B.S. in EE</strong>, Seoul National University of Science and Technology, Korea (Mar.
-                        2020 ~ Feb. 2026)</p>
+                        2020 ~ Feb. 2026) <span class="edu-rank">Rank 2 / 49</span></p>
+                </div>
+            </div>
+
+            <div class="info-group">
+                <div class="info-label">Honors</div>
+                <div class="honor-list">
+                    <a href="gallery.html#presidential-science-scholarship" class="honor-item">
+                        <span class="honor-icon">🎓</span>
+                        <span>
+                            <span class="honor-name">Presidential Science Scholarship</span>
+                            <span class="honor-org">Ministry of Science and ICT, Republic of Korea · 2026</span>
+                        </span>
+                    </a>
+                    <a href="gallery.html#merit-scholarship" class="honor-item">
+                        <span class="honor-icon">🏅</span>
+                        <span>
+                            <span class="honor-name">Graduate Merit Scholarship</span>
+                            <span class="honor-org">Korea University · 2026</span>
+                        </span>
+                    </a>
                 </div>
             </div>
 
@@ -530,7 +609,7 @@
                     <p><strong>Student Researcher</strong>, Korea Institute of Science and Technology (KIST) (Mar. 2026
                         ~
                         Current)</p>
-                    <p><strong>KANANA 429 AI Ambassador / AI Expert</strong>, Kakao Corp (Mar. 2026 ~ Current)</p>
+                    <p><strong>KANANA 429 AI Ambassador / AI Expert</strong>, Kakao Corp (Mar. 2026 ~ Aug. 2026)</p>
                     <p><strong>Research Intern</strong>, Korea Institute of Science and Technology (KIST) (Mar. 2025 ~
                         Feb. 2026)</p>
                     <p><strong>Undergraduate Researcher</strong>, Machine Learning Lab (Jun. 2023 ~ May. 2024)</p>
@@ -575,7 +654,7 @@
     </div>
 
     <div class="greeting-section">
-        <p>Welcome! I am <strong>Seonghan Kwon</strong>, an integrated M.A.–Ph.D. student at <strong>Korea
+        <p>Welcome! I am <strong>Seonghan Kwon</strong>, an integrated M.S. & Ph.D student at <strong>Korea
                 University</strong> and a researcher at the <strong>Korea Institute of Science and Technology
                 (KIST)</strong>. <span class="greeting-emoji">🚀</span></p>
         <p>My work focuses on bridging <strong>bio-inspired algorithms</strong> and <strong>efficient hardware
@@ -610,7 +689,7 @@
         document.addEventListener('DOMContentLoaded', function () {
             // 번갈아가며 보여줄 문구들
             const phrases = [
-                "Integrated MA-Ph.D Student",
+                "Integrated M.S. & Ph.D Student",
                 "Researches Bio-inspired LLM Algorithm",
                 "Designs Digital Circuits and Systems"
             ];
